@@ -1,13 +1,20 @@
 
 import { Toaster } from 'sonner'
+import { BrowserRouter as Router } from 'react-router'
 import './App.css'
+
 
 function App() {
  
 
   return (
     <>
-      <Toaster position='top-right' richColors theme='dark'/>
+    
+
+      <Router>
+          <Toaster position='top-right' richColors theme='dark'/>
+       
+      </Router>
     </>
   )
 }

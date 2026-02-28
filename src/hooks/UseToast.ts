@@ -8,7 +8,7 @@ const useToast = () => {
     toast.success(message)
   }
 
-  const error = (message: string) => {
+  const Error = (message: string) => {
     toast.error(message)
   }
 
@@ -20,7 +20,7 @@ const useToast = () => {
     toast.info(message)
   }
 
-  return { success, error, warning, info }
+  return { success, Error, warning, info }
 }
 
 export default useToast
