@@ -1,6 +1,6 @@
 import { ApiInstance } from "../api/axios";
 import { TODO_ROUTE } from "../constants/Route";
-import type { ResponseTodoDTO } from "../DTO/Response";
+import type { EditTodoDTO, ResponseTodoDTO, TODO } from "../DTO/Response";
 import type { ApiResponse } from "../utils/ApiResponse";
 
 
@@ -12,9 +12,9 @@ export const GetAllTodoService = async() : Promise<ResponseTodoDTO[]> =>{
     return response.data
 }
 
-export const EditTodoService = async(todoId:string) : Promise<ApiResponse> =>{
+export const EditTodoService = async(todoId:string,data:EditTodoDTO) : Promise<ApiResponse> =>{
 
-    const response = await ApiInstance.patch(TODO_ROUTE.EditTodo(todoId))
+    const response = await ApiInstance.patch(TODO_ROUTE.EditTodo(todoId),{data})
 
     return response.data
 }
@@ -28,9 +28,9 @@ export const RemoveTodoService = async(todoId:string) :Promise<ApiResponse> =>{
 }
 
 
-export const CreateTodoService = async() : Promise<ApiResponse> =>{
+export const CreateTodoService = async(data:string) : Promise<ApiResponse> =>{
 
-    const response = await ApiInstance.post(TODO_ROUTE.CreateTodo)
+    const response = await ApiInstance.post(TODO_ROUTE.CreateTodo,{data})
 
     return response.data
 }
