@@ -2,11 +2,13 @@
 
 export interface ResponseTodoDTO{
     data:{
-        _id:string
+        id:string
     title:string
     status:"pending" | "in-progress" | "completed"
     createdAt:Date
-    }
+    },
+    message:string,
+    success:string
 }
 
 export interface EditTodoDTO{
@@ -14,9 +16,3 @@ export interface EditTodoDTO{
     status?:string
 }
 
-export interface TODO{
-    _id:string
-    title:string
-    status:"pending" | "in-progress" | "completed"
-    createdAt:Date
-}

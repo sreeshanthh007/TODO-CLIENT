@@ -1,49 +1,47 @@
-
-import { FormEvent, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { Plus } from 'lucide-react'
+import { Input } from '@/components/ui/input'
 
-interface AddTodoFormProps {
-  onAdd: (title: string) => void
+interface TodoFormProps {
+  onAddTodo: (title: string) => void
 }
 
-export function AddTodoForm({ onAdd }: AddTodoFormProps) {
-    
-  const [input, setInput] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+export default function TodoForm({ onAddTodo }: TodoFormProps) {
+  const [title, setTitle] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!title.trim()) return
 
-    if (!input.trim()) return
-
-    setIsLoading(true)
+    setIsSubmitting(true)
     try {
-      onAdd(input)
-      setInput('')
+      await onAddTodo(title.trim())
+      setTitle('')
     } finally {
-      setIsLoading(false)
+      setIsSubmitting(false)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-2">
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Add a new todo..."
-        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        disabled={isLoading}
-      />
-      <Button
-        type="submit"
-        disabled={!input.trim() || isLoading}
-        className="bg-blue-600 hover:bg-blue-700"
-      >
-        <Plus className="w-4 h-4 mr-2" />
-        Add
-      </Button>
+    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-sm p-6 border border-slate-200">
+      <div className="flex gap-2">
+        <Input
+          type="text"
+          placeholder="Add a new todo..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          disabled={isSubmitting}
+          className="flex-1"
+        />
+        <Button
+          type="submit"
+          disabled={isSubmitting || !title.trim()}
+          className="bg-blue-600 hover:bg-blue-700 text-white"
+        >
+          {isSubmitting ? 'Adding...' : 'Add'}
+        </Button>
+      </div>
     </form>
   )
 }
