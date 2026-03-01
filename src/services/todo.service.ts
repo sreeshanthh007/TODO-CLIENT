@@ -5,7 +5,7 @@ import type { ApiResponse } from "../utils/ApiResponse";
 
 
 
-export const GetAllTodoService = async() : Promise<ResponseTodoDTO[]> =>{
+export const GetAllTodoService = async() : Promise<ResponseTodoDTO> =>{
 
     const response = await ApiInstance.get(TODO_ROUTE.GetAllTodo)
 
@@ -14,7 +14,7 @@ export const GetAllTodoService = async() : Promise<ResponseTodoDTO[]> =>{
 
 export const EditTodoService = async(todoId:string,data:EditTodoDTO) : Promise<ApiResponse> =>{
 
-    const response = await ApiInstance.patch(TODO_ROUTE.EditTodo(todoId),{data})
+    const response = await ApiInstance.patch(TODO_ROUTE.EditTodo(todoId),data)
 
     return response.data
 }
@@ -28,9 +28,9 @@ export const RemoveTodoService = async(todoId:string) :Promise<ApiResponse> =>{
 }
 
 
-export const CreateTodoService = async(data:string) : Promise<ApiResponse> =>{
+export const CreateTodoService = async(title:string) : Promise<ApiResponse> =>{
 
-    const response = await ApiInstance.post(TODO_ROUTE.CreateTodo,{data})
+    const response = await ApiInstance.post(TODO_ROUTE.CreateTodo,{title})
 
     return response.data
 }

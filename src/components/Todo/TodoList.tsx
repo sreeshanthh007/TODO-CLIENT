@@ -1,17 +1,27 @@
-
-import { TodoItem } from './TodoItem'
-import { TODO } from '@/DTO/Response'
+import type { TODO, TodoStatus } from '@/types/todo'
+import TodoItem from './TodoItem'
 
 interface TodoListProps {
   todos: TODO[]
-  onRemove: (id: string) => void
+  editingId: string | null
+  onSetEditing: (id: string | null) => void
+  onUpdateTodo: (id: string, updates: Partial<TODO>) => void
+  onChangeStatus: (id: string, status: TodoStatus) => void
+  onDeleteTodo: (id: string) => void
 }
 
-export function TodoList({ todos, onRemove }: TodoListProps) {
+export default function TodoList({
+  todos,
+  editingId,
+  onSetEditing,
+  onUpdateTodo,
+  onChangeStatus,
+  onDeleteTodo,
+}: TodoListProps) {
   if (todos.length === 0) {
     return (
-      <div className="text-center py-12">
-        <p className="text-gray-500">No todos yet. Add one to get started!</p>
+      <div className="text-center py-12 bg-white rounded-lg shadow-sm border border-slate-200">
+        <p className="text-slate-500 text-lg">No todos yet. Add one to get started!</p>
       </div>
     )
   }
@@ -22,8 +32,11 @@ export function TodoList({ todos, onRemove }: TodoListProps) {
         <TodoItem
           key={todo._id}
           todo={todo}
-          onRemove={onRemove}
-
+          isEditing={editingId === todo._id}
+          onSetEditing={onSetEditing}
+          onUpdateTodo={onUpdateTodo}
+          onChangeStatus={onChangeStatus}
+          onDeleteTodo={onDeleteTodo}
         />
       ))}
     </div>
