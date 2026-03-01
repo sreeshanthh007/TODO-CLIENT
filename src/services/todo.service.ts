@@ -1,14 +1,14 @@
 import { ApiInstance } from "../api/axios";
 import { TODO_ROUTE } from "../constants/Route";
-import type { EditTodoDTO, ResponseTodoDTO, TODO } from "../DTO/Response";
+import type { EditTodoDTO, ResponseTodoDTO } from "../DTO/Response";
 import type { ApiResponse } from "../utils/ApiResponse";
 
 
 
-export const GetAllTodoService = async() : Promise<ResponseTodoDTO> =>{
-
-    const response = await ApiInstance.get(TODO_ROUTE.GetAllTodo)
-
+export const GetAllTodoService = async(page: number, limit: number): Promise<ResponseTodoDTO> => {
+    const response = await ApiInstance.get(TODO_ROUTE.GetAllTodo, {
+        params: { page, limit }
+    })
     return response.data
 }
 
