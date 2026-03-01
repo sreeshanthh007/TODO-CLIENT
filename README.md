@@ -1,73 +1,124 @@
-# React + TypeScript + Vite
+# 📝 Todo Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive Todo application built with React, TypeScript, and Tailwind CSS.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🗂️ Project Structure
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+Todo-client/
+├── public/
+└── src/
+    ├── api/              # Axios instance and base API config
+    ├── assets/           # Static assets (images, icons, etc.)
+    ├── components/       # Reusable UI components
+    │   ├── form/         # AddTodoForm
+    │   ├── pagination/   # Pagination component
+    │   ├── spinner/      # Custom loading spinner
+    │   └── Todo/         # TodoItem, TodoList components
+    ├── constants/        # App-wide constants (routes, limits, etc.)
+    ├── DTO/              # Data Transfer Object interfaces
+    ├── hooks/            # Custom React hooks (useToast, etc.)
+    ├── lib/              # Utility libraries / shadcn setup
+    ├── pages/            # Page-level components (TodoPage)
+    ├── routes/           # React Router route definitions
+    ├── services/         # API service functions (todo.service.ts)
+    ├── types/            # TypeScript type definitions
+    ├── utils/            # Helper utility functions
+    ├── App.css
+    ├── App.tsx
+    ├── index.css
+    └── main.tsx
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Tech Stack
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **React 18** — UI library
+- **TypeScript** — Type safety
+- **Vite** — Build tool and dev server
+- **Tailwind CSS** — Utility-first styling
+- **shadcn/ui** — Accessible component library
+- **Axios** — HTTP client
+- **React Router** — Client-side routing
+
+---
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+- Node.js >= 18
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/sreeshanthh007/TODO-CLIENT.git
+
+# Navigate to the project
+cd Todo-client
+
+# Install dependencies
+npm install
 ```
+
+### Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+VITE_BACKEND_URL=http://localhost:yourPortNumber/todo
+```
+
+### Running the App
+
+```bash
+# Development
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+---
+
+## 📡 API Integration
+
+All API calls are handled through service functions in `src/services/todo.service.ts`.
+
+| Service | Method | Description |
+|---|---|---|
+| `GetAllTodoService(page, limit)` | GET | Fetch paginated todos |
+| `CreateTodoService(title)` | POST | Create a new todo |
+| `EditTodoService(id, data)` | PATCH | Update title or status |
+| `RemoveTodoService(id)` | DELETE | Delete a todo |
+
+---
+
+## ✨ Features
+
+- Create, edit, and delete todos
+- Change todo status — `pending`, `in-progress`, `completed`
+- Paginated todo list (5 per page)
+- Optimistic UI updates
+- Custom loading spinner with 2s minimum display
+- Toast notifications for all actions
+
+---
+
+## 📁 Key Files
+
+| File | Purpose |
+|---|---|
+| `src/pages/TodoPage.tsx` | Main page with all state and handlers |
+| `src/services/todo.service.ts` | API service layer |
+| `src/components/Todo/TodoItem.tsx` | Individual todo item with edit/status |
+| `src/components/pagination/Pagination.tsx` | Reusable pagination controls |
+| `src/constants/` | API routes and app constants |
