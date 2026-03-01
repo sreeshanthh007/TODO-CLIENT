@@ -5,6 +5,7 @@ import TodoList from '@/components/Todo/TodoList'
 import type { TODO } from '@/types/todo'
 import { CreateTodoService, EditTodoService, GetAllTodoService, RemoveTodoService } from '@/services/todo.service'
 import useToast from '@/hooks/UseToast'
+import { TodoSpinner } from '@/components/spinner/Spinner'
 
 
 export default function TodoPage() {
@@ -110,7 +111,7 @@ const handleUpdateTodo = async (id: string, updates: Partial<TODO>) => {
           <TodoForm onAddTodo={handleAddTodo} />
 
           {loading ? (
-            <div className="text-center py-8 text-slate-600">Loading...</div>
+            <TodoSpinner />
           ) : (
             <TodoList
               todos={todos}
