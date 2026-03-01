@@ -86,11 +86,11 @@ export default function TodoItem({
             <SelectTrigger className="w-32 h-8">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="pending">Pending</SelectItem>
-              <SelectItem value="in-progress">In Progress</SelectItem>
-              <SelectItem value="completed">Completed</SelectItem>
-            </SelectContent>
+            <SelectContent className="bg-white z-50">
+            <SelectItem value="pending">Pending</SelectItem>
+            <SelectItem value="in-progress">In Progress</SelectItem>
+            <SelectItem value="completed">Completed</SelectItem>
+          </SelectContent>
           </Select>
         )}
 
